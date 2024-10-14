@@ -30,3 +30,108 @@
 //# php artisan serve
 
 //localni server se nam rozjede na teto adrese: http://127.0.0.1:8000/
+
+//struktura projektu
+//----SLOZKY-----
+// /app/ - toto je slozka kam budeme davat controllery a modely
+// /config/ - zde budeme uvadet prihlasovaci udaje k ruznym servisum (databaze, email, cloud, ...)
+// /database/ - zde najdeme migracni soubory, databazi sqlite 
+// /public/ - zde bude frontendak mit CSS, JS a obrazky, ktere nechce minifikovat
+// /resources/ - zde budou nase Blade sablony (exkluzivni soubor pro Frontendaka)
+// /routes/ - zde budeme definovat jakou URL sablona dostane
+V PHP z $_GET = www.zoo.cz?id-stranky=kontakt
+v /routes/ Blade = www.zoo.cz/kontakt
+//laravel se da pouzit jak pro frontend tak backend 
+//pokud chceme pouzivat laravel pro backend a vue pro frontend musime pouzit a nainstalovat "laravel inertia"
+// /storage/ - sem se budou ukladat soubory ktere uploaduji uzivatele
+// /tests/ - zde jsou scripty, ktere testuji vasi aplikaci
+// /vendor/ - zde jsou knihovny stazene pomoci composeru
+
+//----SOUBORY------
+// .env - soubor environment, aplikaci muzeme spustit v ruznych modech/prostredich, kazde prostredi bude mit vlastni .env soubor, v tomto souboru uvedeme prihlasovaci udaje k ruznym sluzbam (.env ma vetsi prioritu nez /config/)
+// .gitignore - soubory, ktere git neuvidi (nebudeme je nikdy commitovat)
+// composer.json - seznam vsech knihoven vasi aplikace
+// package.json - seznam vsech knihoven vasi aplikace
+// vite.config.js - zde uvadime pravidla jak minifikovat soubory pri buildovani aplikace
+
+//koukneme na nasi homepage
+//kazda stranka ma svoji sablonu, kterou najdeme ve slozce /resources/views/
+//kazda sablona ma koncovku nazvu .blade.php
+//v sablone se echo provadi stejne jako ve vue pomoci {{ $promenna }}
+
+//vytvorime si vlastni homepage sablonu
+//toto je prikaz ktery vypise seznam vsech prikazu laravelu
+//# php artisan
+//tento prikaz nam vytvori sablonu homepage
+//# php artisan make:view homepage 
+
+//jak zobrazit nasi novou stranku misto welcome.blade.php
+//musime zmenit routovani
+//routovani - kazda sablona ma pridelenou nejakou URL
+//koukneme do souboru /routes/web.php 
+//zde prepiseme routu "/", aby misto welcome vypsala sablonu homepage
+
+//komponenta
+//znovu pouzitelna cast stranky (menu, hlavicka, paticka, a jine)
+//vytvorime si komponentu pro menu
+// # php artisan make:component menu
+//komponenta se sklada ze 2 souboru (sablona a minicontroller)
+//sablona vytvari vzhled komponenty (/resources/views/components)
+//minicontroller se stara o logiku komponenty (/app/View/Components)
+
+//musime nakodovat komponentu menu.blade.php
+//potom musime kompoentu nekde vyuzit
+//komponentu pouzijeme tak, ze do jine sablony napiseme <x-nazev-komponenty />
+//do sablony homepage vlozime <x-menu />
+
+//vytvorime si ted komponentu i pro head stranky a naucime se pripojit CSS soubor
+//# php artisan make:component head
+
+//pripojime CSS soubor do stranky
+//CSS soubory budeme davat do slozky /public/
+//css soubory budeme davat do slozky public
+//ve slozce public budeme mit css, js a obrazky
+//kdykoliv bdueme chtit v sablone pripojit soubor ze slozky public, tak pouzijeme funkci asset()
+// {{ asset('./css/style.css') }}
+
+//v sablone muzeme pouzit HTML komentare, ale je lepsi pouzit blade komentare
+// {{-- toto je komentar --}}
+
+//cvicne si vytvorime stranku kontakt
+//# php artisan make:view kontakt
+//nakodujeme blade sablonu pridame x-head a x-menu
+//musime strance pridelait nejake URL, napiseme to do /routes/web.php
+
+//jak poslat data z backendu do sablony?
+//abychom mohli poslat data do sablony, tak musime pro sablonu nejprve vytvorit controller
+//controller obsahuje veskerou logiku stranky
+//# php artisan make:controller HomepageController
+// controller se vytvori do slozky /app/Http/Controllers
+
+//v souboru web.php mame v route anonymni funkci ktera vykrelsuje sablonu
+//tuto funkci presuneme do controlleru a dame ji jmeno index
+//v route pak uvedem odkaz na contorller a funkci
+//pokazde kdzy pouzijete contorller, tak musite uvest namespace use
+
+//# php artisan make:controller KontaktController
+//presuneme anonymni funkci z web.php do KontaktController
+//dame funkci jmeno index
+//ve web.php misto anonymni funkce budeme mit pole, kam uvedeme nazev contorlleru a nazev funkce
+
+//frontendak muze nektere html elementy opodminkovat
+//misto klasickeho php if() pouzije bladovsky @if() 
+//bladovsky @if je mnohem prehlednejsi
+
+//poslete do sablony boolean promennou $jeOtevreno
+//vypiste bud <h3>Mame otevreno</h3> nebo <h3>Mame zavreno</h3>
+
+//jak frontendak zjisti jake promenne mu backendak poslal?
+//do sablony vlozi tento kod: {{ dd(get_defined_vars()) }}
+
+//stejne jako v klasickem PHP nemuzeme echovat pole
+//pokud frontendak dostane pole, tak musi pole proiterovat
+// @foreach()
+
+//LARAVEL A databaze
+//laravel pouziva databazi sqlite, ale muzeme si to prepnout na mySQL
+//staci v souboru .env prepsat radek a odkomentovat radky s prihlasovacima udajema

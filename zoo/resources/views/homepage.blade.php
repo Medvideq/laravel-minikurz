@@ -43,6 +43,19 @@
             @endforeach
         </ul>
 
+        <table border="1px">
+            <tr>
+                <th>Jmeno</th>
+                <th>Popis</th>
+            </tr>
+        @foreach($poleZviratek AS $zvire)
+            <tr>
+                <td> {{$zvire->jmeno}} </td>
+                <td> {{$zvire->popis}} </td>
+            </tr>
+        @endforeach
+        </table>
+
     </div>
 </body>
 </html>

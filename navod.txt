@@ -1,0 +1,32 @@
+//Laravel je framework, ktery je napsany v PHP a pouziva achitekturu MVC
+// model - zde budou kody, ktere se staraji o prenost dat mezi aplikaci a databazi
+// view - zde budou kody, ktere se staraji o vzhled stranky
+// controller - cela logika stranky bude v controllerech
+
+//nejpopularnejsi PHP frameworky
+//Laravel, Nette, Symphony, YII
+//vsechny jsou postavene na stejne architekture
+
+//tyto frameworky mohou pouzivat libovolny frontend framework(react, vue, ...)
+//maji vlastni frontend zalozeny na sablonach
+//sablonovaci system oddeluje praci frontendaka a backendaka
+//laravel pouziva sablonu typu BLADE, nette pouziva sablonu LATTE
+//stahnete si rozsireni do VSC pro praci s sablonou
+//Laravel Blade Snippets od Winnie Lin
+
+//laravel od verze 11 pouziva defualtne SQLite misto mySQL systemu
+//SQLite - single file databaze, embeded databaze
+//stahneme si do VSC rozsireni SQLite Viewer or Florian Klampfer
+
+//vytvoreni projektu
+//spustime na slozce laravel-minikurz
+//# composer create-project laravel/laravel zoo
+//tento prikaz stahne soubory a vytvori projekt s nazvem zoo
+//vyckejte dokud se neprovede cela operace Running migrations
+
+//laravel nespoleha na xampp ma vlastni localni server a vlastni databazi sqlite
+//stejne jako jsme to delali ve Vue, musime pomoci prikazove radky nastartovat localni server
+//spustime v nasi slozce zoo
+//# php artisan serve
+
+//localni server se nam rozjede na teto adrese: http://127.0.0.1:8000/
